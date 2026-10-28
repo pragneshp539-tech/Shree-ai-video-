@@ -1,0 +1,6 @@
+{
+  "name": "Sree AI Video Studio",
+  "description": "Generate cinematic AI videos from text and photos with realistic styles, custom aspect ratios, audio tracks, and multilingual support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,170 @@
+package com.example.model
+
+enum class Language(val code: String, val displayName: String, val flag: String) {
+    ENGLISH("en", "English", "🇺🇸"),
+    HINDI("hi", "हिंदी", "🇮🇳"),
+    GUJARATI("gu", "ગુજરાતી", "🇮🇳");
+
+    companion object {
+        fun fromCode(code: String): Language {
+            return entries.find { it.code == code } ?: ENGLISH
+        }
+    }
+}
+
+object StringsHelper {
+    fun t(key: String, lang: Language): String {
+        return when (lang) {
+            Language.ENGLISH -> englishStrings[key] ?: key
+            Language.HINDI -> hindiStrings[key] ?: englishStrings[key] ?: key
+            Language.GUJARATI -> gujaratiStrings[key] ?: englishStrings[key] ?: key
+        }
+    }
+
+    private val englishStrings = mapOf(
+        "app_title" to "Sree AI Video Studio",
+        "tab_create" to "Create",
+        "tab_gallery" to "Gallery",
+        "tab_prompts" to "Prompt Lab",
+        "tab_profile" to "Studio Free",
+        "text_to_video" to "Text to Video",
+        "image_to_video" to "Image to Video",
+        "prompt_placeholder" to "Describe your video vision in detail...",
+        "prompt_hint" to "e.g., Royal bride walking into grand palace hall with golden chandeliers, cinematic 4K lighting",
+        "magic_expand" to "AI Enhance Prompt",
+        "select_style" to "AI Video Style",
+        "aspect_ratio" to "Aspect Ratio",
+        "duration" to "Duration",
+        "audio_track" to "Audio & Music",
+        "camera_motion" to "Camera Movement",
+        "generate_button" to "Generate Video (Free)",
+        "credits" to "Free",
+        "tokens_label" to "Tokens",
+        "free_forever_badge" to "100% Free Forever",
+        "demo_mode_active" to "Free Studio Engine Active",
+        "demo_mode_desc" to "Running 100% free studio engine with daily 24h token refills. Optional: add custom Cloud API key in Studio Free.",
+        "upload_photo" to "Select or Pick Photo",
+        "motion_strength" to "Motion Intensity",
+        "generating_title" to "Synthesizing Video (Free)...",
+        "cancel" to "Cancel",
+        "my_videos" to "Created Videos",
+        "no_videos_yet" to "No videos yet. Create your first free cinematic masterpiece!",
+        "play" to "Play",
+        "pause" to "Pause",
+        "download" to "Export MP4 (Free)",
+        "share" to "Share Video",
+        "saved_to_gallery" to "Video saved to device storage!",
+        "daily_bonus" to "Daily 24h Check-In",
+        "daily_checkin_title" to "24-Hour Daily Check-In",
+        "daily_checkin_desc" to "Check in every 24 hours to earn free video generation tokens and maintain your streak!",
+        "checkin_now" to "Claim Today's Free Tokens",
+        "streak_label" to "Day Streak",
+        "claimed_status" to "Claimed",
+        "next_checkin_timer" to "Next check-in in",
+        "instant_demo_reset" to "Reset 24h Timer (Demo)",
+        "daily_bonus_claimed" to "Daily Check-in Complete! Tokens Added!",
+        "plans_title" to "100% Free Lifetime Access",
+        "api_settings" to "Optional Cloud API Key",
+        "save" to "Save",
+        "api_key_placeholder" to "Optional: Enter Replicate / Fal.ai / Luma API Key",
+        "use_sample_photo" to "Or select sample image:"
+    )
+
+    private val hindiStrings = mapOf(
+        "app_title" to "श्री एआई वीडियो स्टूडियो",
+        "tab_create" to "बनाएं",
+        "tab_gallery" to "गैलरी",
+        "tab_prompts" to "प्रॉम्प्ट लैब",
+        "tab_profile" to "मुफ़्त स्टूडियो",
+        "text_to_video" to "टेक्स्ट से वीडियो",
+        "image_to_video" to "फोटो से वीडियो",
+        "prompt_placeholder" to "अपने वीडियो की कल्पना का वर्णन करें...",
+        "prompt_hint" to "उदा., भव्य महल में चलती दुल्हन, सुनहरी रोशनी, 4K सिनेमैटिक",
+        "magic_expand" to "एआई प्रॉम्प्ट सुधारें",
+        "select_style" to "एआई वीडियो स्टाइल",
+        "aspect_ratio" to "पहलू अनुपात (आकार)",
+        "duration" to "अवधि",
+        "audio_track" to "ऑडियो और संगीत",
+        "camera_motion" to "कैमरा मोशन",
+        "generate_button" to "मुफ़्त वीडियो बनाएं",
+        "credits" to "मुफ़्त",
+        "tokens_label" to "टोकन",
+        "free_forever_badge" to "100% हमेशा के लिए मुफ़्त",
+        "demo_mode_active" to "मुफ़्त स्टूडियो इंजन सक्रिय",
+        "demo_mode_desc" to "यह ऐप पूरी तरह मुफ़्त है। हर 24 घंटे में दैनिक चेक-इन से मुफ़्त टोकन मिलते हैं।",
+        "upload_photo" to "फोटो अपलोड करें",
+        "motion_strength" to "मोशन गति",
+        "generating_title" to "मुफ़्त वीडियो तैयार हो रहा है...",
+        "cancel" to "रद्द करें",
+        "my_videos" to "मेरे वीडियो",
+        "no_videos_yet" to "अभी कोई वीडियो नहीं है। अपना पहला मुफ़्त वीडियो बनाएं!",
+        "play" to "चलाएं",
+        "pause" to "रोकें",
+        "download" to "डाउनलोड करें (मुफ़्त)",
+        "share" to "शेयर करें",
+        "saved_to_gallery" to "वीडियो सेव हो गया!",
+        "daily_bonus" to "दैनिक 24h चेक-इन",
+        "daily_checkin_title" to "24-घंटे दैनिक मुफ़्त चेक-इन",
+        "daily_checkin_desc" to "हर 24 घंटे में चेक-इन करके मुफ़्त वीडियो टोकन प्राप्त करें और अपनी स्ट्रीक जारी रखें!",
+        "checkin_now" to "आज के मुफ़्त टोकन प्राप्त करें",
+        "streak_label" to "दिनों की स्ट्रीक",
+        "claimed_status" to "प्राप्त हुआ",
+        "next_checkin_timer" to "अगला चेक-इन",
+        "instant_demo_reset" to "24h टाइमर रीसेट करें (डेमो)",
+        "daily_bonus_claimed" to "चेक-इन पूरा हुआ! मुफ़्त टोकन जोड़ दिए गए!",
+        "plans_title" to "100% मुफ़्त प्लान",
+        "api_settings" to "वैकल्पिक क्लाउड एपीआई सेटिंग्स",
+        "save" to "सहेजें",
+        "api_key_placeholder" to "वैकल्पिक: अपनी एपीआई कुंजी दर्ज करें",
+        "use_sample_photo" to "या नमूना फोटो चुनें:"
+    )
+
+    private val gujaratiStrings = mapOf(
+        "app_title" to "શ્રી એઆઈ વિડીયો સ્ટુડિયો",
+        "tab_create" to "બનાવો",
+        "tab_gallery" to "ગેલેરી",
+        "tab_prompts" to "પ્રોમ્પ્ટ લેબ",
+        "tab_profile" to "મફત સ્ટુડિયો",
+        "text_to_video" to "ટેક્સ્ટ માંથી વિડીયો",
+        "image_to_video" to "ફોટો માંથી વિડીયો",
+        "prompt_placeholder" to "તમારા વિડીયો કલ્પનાનું વર્ણન કરો...",
+        "prompt_hint" to "દા.ત., ભવ્ય મહેલમાં ચાલતી નવવધૂ, ગોલ્ડન રોશની, 4K સિનેમેટિક",
+        "magic_expand" to "એઆઈ પ્રોમ્પ્ટ સુધારો",
+        "select_style" to "એઆઈ વિડીયો સ્ટાઇલ",
+        "aspect_ratio" to "ગુણોત્તર (સાઇઝ)",
+        "duration" to "સમયગાળો",
+        "audio_track" to "ઓડિયો અને સંગીત",
+        "camera_motion" to "કેમેરા મુવમેન્ટ",
+        "generate_button" to "મફત વિડીયો બનાવો",
+        "credits" to "મફત",
+        "tokens_label" to "ટોકન",
+        "free_forever_badge" to "100% હંમેશા માટે મફત",
+        "demo_mode_active" to "મફત સ્ટુડિયો એન્જિન સક્રિય",
+        "demo_mode_desc" to "આ એપ્લિકેશન સંપૂર્ણપણે મફત છે. દર 24 કલાકે દૈનિક ચેક-ઇનથી મફત ટોકન મળે છે.",
+        "upload_photo" to "ફોટો અપલોડ કરો",
+        "motion_strength" to "મોશન ગતિ",
+        "generating_title" to "મફત વિડીયો બની રહ્યો છે...",
+        "cancel" to "રદ કરો",
+        "my_videos" to "બનાવેલા વિડીયો",
+        "no_videos_yet" to "હજી કોઈ વિડીયો નથી. તમારો પ્રથમ મફત વિડીયો બનાવો!",
+        "play" to "ચલાવો",
+        "pause" to "રોકો",
+        "download" to "ડાઉનલોડ કરો (મફત)",
+        "share" to "શેર કરો",
+        "saved_to_gallery" to "વિડીયો સેવ થઈ ગયો!",
+        "daily_bonus" to "દૈનિક 24h ચેક-ઇન",
+        "daily_checkin_title" to "24-કલાક દૈનિક મફત ચેક-ઇન",
+        "daily_checkin_desc" to "દર 24 કલાકે ચેક-ઇન કરીને મફત વિડીયો ટોકન મેળવો અને તમારી સ્ટ્રીક જાળવી રાખો!",
+        "checkin_now" to "આજના મફત ટોકન મેળવો",
+        "streak_label" to "દિવસોની સ્ટ્રીક",
+        "claimed_status" to "મેળવી લીધું",
+        "next_checkin_timer" to "આગામી ચેક-ઇન",
+        "instant_demo_reset" to "24h ટાઈમર રીસેટ કરો (ડેમો)",
+        "daily_bonus_claimed" to "ચેક-ઇન પૂર્ણ થયું! મફત ટોકન ઉમેરાયા!",
+        "plans_title" to "100% મફત પ્લાન",
+        "api_settings" to "વૈકલ્પિક ક્લાઉડ એપીઆઈ સેટિંગ્સ",
+        "save" to "સાચવો",
+        "api_key_placeholder" to "વૈકલ્પિક: તમારી એપીઆઈ કી દાખલ કરો",
+        "use_sample_photo" to "અથવા નમૂના ફોટો પસંદ કરો:"
+    )
+}
